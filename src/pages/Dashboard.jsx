@@ -55,14 +55,14 @@ export default function Dashboard() {
 
           {/* Hero Content */}
           <div className="text-center md:text-left space-y-3 max-w-xl">
-            <h1 className="text-3xl sm:text-4xl font-normal tracking-tight leading-snug">
+            <h1 className="text-2xl sm:text-3xl font-normal tracking-tight leading-snug">
               Keep track of shared trip bills, rent, and dining out.
             </h1>
-            <p className="text-white/80 text-sm font-normal">
+            <p className="text-white/80 text-xs font-normal">
               Manage group balances seamlessly with zero transaction friction.
             </p>
             <div className="pt-2">
-              <span className="inline-block bg-[#fce4ec] text-[#8b263e] text-xs font-normal px-4 py-1.5 rounded-full">
+              <span className="inline-block bg-[#fce4ec] text-[#8b263e] text-xs font-normal px-4 py-1 rounded-full">
                 Active group overview
               </span>
             </div>
@@ -91,13 +91,81 @@ export default function Dashboard() {
 
       {/* Main Container */}
       <section className="-mt-10 bg-[#fdf8f6] rounded-t-[2.5rem] px-4 sm:px-8 pt-8 pb-16 relative z-20">
-        <div className="max-w-6xl mx-auto space-y-12">
+        <div className="max-w-6xl mx-auto space-y-10">
+
+          {/* Balanced Financial Overview Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            
+            {/* Card 1: Net Balance (Clean White Base) */}
+            <div className="bg-white border border-[#f5e6ea] p-5 sm:p-6 rounded-3xl flex flex-col justify-between h-full shadow-xs">
+              <div className="flex items-center justify-between">
+                <span className="text-[10px] text-[#8b263e] font-normal tracking-wider uppercase">NET BALANCE</span>
+                <div className="p-2 rounded-full bg-[#fce4ec] text-[#8b263e]">
+                  <Wallet className="w-4 h-4" />
+                </div>
+              </div>
+
+              <div className="mt-4">
+                <div className="text-2xl sm:text-3xl font-normal tracking-tight text-[#8b263e]">
+                  {mockSummary.totalBalance >= 0 ? `+$${mockSummary.totalBalance.toFixed(2)}` : `-$${Math.abs(mockSummary.totalBalance).toFixed(2)}`}
+                </div>
+                <p className="text-[11px] text-[#3a1d28]/60 mt-1 font-normal">
+                  {mockSummary.totalBalance >= 0 ? "You are overall owed money" : "You have pending dues"}
+                </p>
+              </div>
+            </div>
+
+            {/* Card 2: You Get Back (Green Tinted Background) */}
+            <div className="bg-[#f0fdf4] border border-emerald-200 p-5 sm:p-6 rounded-3xl flex flex-col justify-between h-full shadow-xs">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-1.5 text-emerald-700 text-xs font-normal">
+                  <ArrowUpRight className="w-4 h-4" />
+                  <span>You get back</span>
+                </div>
+                <div className="p-2 rounded-full bg-emerald-100 text-emerald-800">
+                  <ArrowUpRight className="w-4 h-4" />
+                </div>
+              </div>
+
+              <div className="mt-4">
+                <div className="text-2xl sm:text-3xl font-normal text-emerald-950">
+                  ${mockSummary.youAreOwed.toFixed(2)}
+                </div>
+                <p className="text-[11px] text-emerald-800/70 mt-1 font-normal">
+                  Total incoming debts from members
+                </p>
+              </div>
+            </div>
+
+            {/* Card 3: You Owe (Red Tinted Background) */}
+            <div className="bg-[#fff1f2] border border-rose-200 p-5 sm:p-6 rounded-3xl flex flex-col justify-between h-full shadow-xs">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-1.5 text-rose-700 text-xs font-normal">
+                  <ArrowDownLeft className="w-4 h-4" />
+                  <span>You owe</span>
+                </div>
+                <div className="p-2 rounded-full bg-rose-100 text-rose-800">
+                  <ArrowDownLeft className="w-4 h-4" />
+                </div>
+              </div>
+
+              <div className="mt-4">
+                <div className="text-2xl sm:text-3xl font-normal text-rose-950">
+                  ${mockSummary.youOwe.toFixed(2)}
+                </div>
+                <p className="text-[11px] text-rose-800/70 mt-1 font-normal">
+                  Total outgoing debts across groups
+                </p>
+              </div>
+            </div>
+
+          </div>
 
           {/* Category Filter Section */}
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <div>
-                <h2 className="text-xl font-normal text-[#8b263e]">Categories</h2>
+                <h2 className="text-lg font-normal text-[#8b263e]">Categories</h2>
                 <p className="text-xs text-[#3a1d28]/60 mt-0.5">Filter your active groups by type</p>
               </div>
 
@@ -163,9 +231,9 @@ export default function Dashboard() {
                   </div>
 
                   <div className="space-y-2 flex-grow">
-                    <h3 className="text-sm font-normal text-[#3a1d28] line-clamp-1">{group.name}</h3>
+                    <h3 className="text-xs font-normal text-[#3a1d28] line-clamp-1">{group.name}</h3>
                     
-                    <div className="flex items-center gap-1.5 text-xs text-[#3a1d28]/60">
+                    <div className="flex items-center gap-1.5 text-[11px] text-[#3a1d28]/60">
                       <Users className="w-3.5 h-3.5 text-[#8b263e]" />
                       <span>{group.membersCount} members</span>
                     </div>
@@ -173,7 +241,7 @@ export default function Dashboard() {
                     <div className="flex items-center justify-between pt-2 border-t border-[#f5e6ea]">
                       <div>
                         <span className="text-[10px] text-[#3a1d28]/50 uppercase tracking-wider block">Your share</span>
-                        <span className={`text-sm font-normal ${group.yourBalance >= 0 ? 'text-[#8b263e]' : 'text-[#3a1d28]'}`}>
+                        <span className={`text-xs font-normal ${group.yourBalance >= 0 ? 'text-[#8b263e]' : 'text-[#3a1d28]'}`}>
                           {group.yourBalance >= 0 ? `+$${group.yourBalance.toFixed(2)}` : `-$${Math.abs(group.yourBalance).toFixed(2)}`}
                         </span>
                       </div>
@@ -188,120 +256,48 @@ export default function Dashboard() {
             ))}
           </div>
 
-          {/* Refined Overview & Activity Section */}
-          <div className="space-y-6 pt-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <h2 className="text-xl font-normal text-[#8b263e]">Overview & Activity</h2>
-                <p className="text-xs text-[#3a1d28]/60 mt-0.5">Your financial status and recent group updates</p>
+          {/* Activity Section */}
+          <div className="bg-white rounded-3xl p-6 border border-[#f5e6ea] flex flex-col justify-between space-y-4">
+            <div className="flex items-center justify-between pb-4 border-b border-[#f5e6ea]">
+              <div className="flex items-center gap-2">
+                <Receipt className="w-4 h-4 text-[#8b263e]" />
+                <h3 className="text-xs font-normal text-[#3a1d28]">Recent Activity</h3>
               </div>
-              <Link
-                to="/activity"
-                className="inline-flex items-center gap-1.5 bg-white border border-[#f5e6ea] px-4 py-2 rounded-full text-xs text-[#8b263e] hover:bg-[#fce4ec]/50 transition-colors"
-              >
-                <span>View timeline</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </Link>
+              <span className="text-[11px] text-[#3a1d28]/50">Latest updates</span>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-              
-              {/* Left Column: Net Balance Overview Cards */}
-              <div className="lg:col-span-5 flex flex-col gap-4">
-                
-                {/* Net Balance Card */}
-                <div className="bg-[#8b263e] text-white p-6 rounded-3xl relative overflow-hidden flex flex-col justify-between min-h-[160px]">
-                  <div className="flex items-center justify-between relative z-10">
-                    <span className="text-xs text-[#fce4ec] font-normal tracking-wide uppercase">Overall Net Balance</span>
-                    <div className="p-2 rounded-full bg-white/10 backdrop-blur-md">
-                      <Wallet className="w-4 h-4 text-[#fce4ec]" />
+            {/* Stream List */}
+            <div className="divide-y divide-[#f5e6ea]">
+              {mockRecentExpenses.slice(0, 3).map((expense) => {
+                const isPaidByYou = expense.paidBy.toLowerCase() === 'you' || expense.paidBy.toLowerCase() === 'aayusha';
+
+                return (
+                  <div key={expense.id} className="py-3.5 first:pt-1 last:pb-1 flex items-center justify-between">
+                    <div className="space-y-1">
+                      <h4 className="text-xs font-normal text-[#3a1d28]">{expense.title}</h4>
+                      <p className="text-[11px] text-[#3a1d28]/60 flex items-center gap-1.5">
+                        <span className="text-[#8b263e] font-normal">{expense.groupName}</span>
+                        <span>•</span>
+                        <Clock className="w-3 h-3 text-[#3a1d28]/40 shrink-0" />
+                        <span>{isPaidByYou ? 'You paid' : `Paid by ${expense.paidBy}`} • {expense.date}</span>
+                      </p>
                     </div>
+
+                    <span className="text-xs font-normal text-[#3a1d28]">
+                      ${expense.amount.toFixed(2)}
+                    </span>
                   </div>
+                );
+              })}
+            </div>
 
-                  <div className="relative z-10 mt-4">
-                    <div className="text-3xl font-normal tracking-tight">
-                      {mockSummary.totalBalance >= 0 ? `+$${mockSummary.totalBalance.toFixed(2)}` : `-$${Math.abs(mockSummary.totalBalance).toFixed(2)}`}
-                    </div>
-                    <p className="text-[11px] text-[#fce4ec]/80 mt-1">
-                      {mockSummary.totalBalance >= 0 ? "You are overall owed money across all groups" : "You have pending dues to clear"}
-                    </p>
-                  </div>
-
-                  <div className="absolute -right-6 -bottom-6 w-32 h-32 rounded-full bg-white/5 pointer-events-none" />
-                </div>
-
-                {/* Sub-Metrics Row */}
-                <div className="grid grid-cols-2 gap-3">
-                  <div className="bg-white p-4 rounded-2xl border border-[#f5e6ea]">
-                    <div className="flex items-center gap-1.5 text-emerald-700 text-xs mb-1">
-                      <ArrowUpRight className="w-3.5 h-3.5" />
-                      <span>You get back</span>
-                    </div>
-                    <p className="text-lg font-normal text-[#3a1d28]">${mockSummary.youAreOwed.toFixed(2)}</p>
-                  </div>
-
-                  <div className="bg-white p-4 rounded-2xl border border-[#f5e6ea]">
-                    <div className="flex items-center gap-1.5 text-rose-700 text-xs mb-1">
-                      <ArrowDownLeft className="w-3.5 h-3.5" />
-                      <span>You owe</span>
-                    </div>
-                    <p className="text-lg font-normal text-[#3a1d28]">${mockSummary.youOwe.toFixed(2)}</p>
-                  </div>
-                </div>
-
-              </div>
-
-              {/* Right Column: Activity Stream */}
-              <div className="lg:col-span-7 bg-white rounded-3xl p-6 border border-[#f5e6ea] flex flex-col justify-between">
-                <div className="flex items-center justify-between pb-4 border-b border-[#f5e6ea]">
-                  <div className="flex items-center gap-2">
-                    <Receipt className="w-4 h-4 text-[#8b263e]" />
-                    <h3 className="text-sm font-normal text-[#3a1d28]">Recent Activity</h3>
-                  </div>
-                  <span className="text-[11px] text-[#3a1d28]/50">Latest updates</span>
-                </div>
-
-                {/* Vertical Stream List */}
-                <div className="divide-y divide-[#f5e6ea] py-1">
-                  {mockRecentExpenses.slice(0, 3).map((expense) => {
-                    const isPaidByYou = expense.paidBy.toLowerCase() === 'you' || expense.paidBy.toLowerCase() === 'aayusha';
-                    return (
-                      <div key={expense.id} className="py-3.5 first:pt-2 last:pb-2 flex items-center justify-between gap-4">
-                        <div className="flex items-center gap-3.5 min-w-0">
-                          <div className={`w-2 h-2 rounded-full shrink-0 ${isPaidByYou ? 'bg-[#8b263e]' : 'bg-[#3a1d28]/30'}`} />
-
-                          <div className="space-y-0.5 min-w-0">
-                            <div className="flex items-center gap-2 flex-wrap">
-                              <span className="text-xs font-normal text-[#3a1d28] truncate">{expense.title}</span>
-                              <span className="bg-[#fce4ec] text-[#8b263e] text-[10px] px-2 py-0.5 rounded-full font-normal shrink-0">
-                                {expense.groupName}
-                              </span>
-                            </div>
-                            <p className="text-[11px] text-[#3a1d28]/60 flex items-center gap-1">
-                              <Clock className="w-3 h-3 text-[#3a1d28]/40 shrink-0" />
-                              <span>{isPaidByYou ? 'You paid' : `Paid by ${expense.paidBy}`} • {expense.date}</span>
-                            </p>
-                          </div>
-                        </div>
-
-                        <div className="text-right shrink-0">
-                          <span className="text-xs font-normal text-[#3a1d28] block">${expense.amount.toFixed(2)}</span>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-
-                <div className="pt-3 border-t border-[#f5e6ea] text-center">
-                  <Link 
-                    to="/activity" 
-                    className="text-xs text-[#8b263e] hover:text-[#721e32] transition-colors inline-flex items-center gap-1 font-normal"
-                  >
-                    View full expense history <ArrowRight className="w-3 h-3" />
-                  </Link>
-                </div>
-              </div>
-
+            <div className="pt-3 border-t border-[#f5e6ea] text-center">
+              <Link 
+                to="/activity" 
+                className="text-xs text-[#8b263e] hover:text-[#721e32] transition-colors inline-flex items-center gap-1 font-normal"
+              >
+                View full expense history <ArrowRight className="w-3 h-3" />
+              </Link>
             </div>
           </div>
 
