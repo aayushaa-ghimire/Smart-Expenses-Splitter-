@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+
+@theme {
+  --font-sans: 'Poppins', sans-serif;
+
+  --color-cream-bg: #fff8f6;
+  --color-berry-primary: #8b263e;
+  --color-berry-hover: #721e32;
+  --color-pink-soft: #fce4ec;
+  --color-pink-medium: #b4647d;
+  --color-[#3a1d28]: #3a1d28;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  background-color: #fff8f6;
+  color: #3a1d28;
+  -webkit-font-smoothing: antialiased;
+}
