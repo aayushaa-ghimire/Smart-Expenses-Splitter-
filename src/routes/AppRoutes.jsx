@@ -5,6 +5,7 @@ import CreateGroup from '../pages/CreateGroup';
 import GroupDetails from '../pages/GroupDetails';
 import Profile from '../pages/Profile';
 import Activity from '../pages/Activity';
+import NotFound from '../pages/NotFound';
 
 export default function AppRoutes() {
   return (
@@ -14,6 +15,7 @@ export default function AppRoutes() {
       <Route path="group/:id" element={<GroupDetails />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/activity" element={<Activity />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }
